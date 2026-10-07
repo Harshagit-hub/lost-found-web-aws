@@ -1,1 +1,1608 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ReConnect - Lost & Found</title>
+
+<style>
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background: #fffaf7;
+        color: #30283a;
+    }
+
+
+    /* HERO */
+
+    .hero {
+        min-height: 360px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: linear-gradient(120deg, #765294, #aa8fc1);
+        color: white;
+        padding: 50px 7%;
+        gap: 40px;
+    }
+
+    .hero-content {
+        max-width: 600px;
+    }
+
+    .hero-image {
+        width: 420px;
+        height: 320px;
+        flex-shrink: 0;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    .hero-image img {
+        width: 380px;
+        height: 320px;
+        object-fit: cover;
+        border-radius: 65% 35% 60% 40% / 45% 55% 45% 55%;
+        border: none;
+        box-shadow: none;
+    }
+
+    .hero-small {
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        margin-bottom: 15px;
+    }
+
+    .hero h1 {
+        font-size: 48px;
+        line-height: 1.15;
+        margin-bottom: 18px;
+    }
+
+    .hero h1 span {
+        color: #fff0c9;
+    }
+
+    .hero p {
+        color: #ffffff;
+        font-size: 17px;
+        line-height: 1.6;
+        max-width: 600px;
+    }
+
+    .hero-buttons {
+        margin-top: 30px;
+        display: flex;
+        gap: 15px;
+    }
+
+    .hero-btn {
+        padding: 13px 23px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .primary-btn {
+        background: #fffaf0;
+        color: #4f3768;
+        border: none;
+    }
+
+    .secondary-btn {
+        background: transparent;
+        border: 1px solid #f7edf7;
+        color: white;
+    }
+
+
+    /* MAIN */
+
+    .container {
+        width: 86%;
+        max-width: 1250px;
+        margin: 40px auto;
+    }
+
+    .form-card {
+        background: white;
+        border-radius: 18px;
+        padding: 35px;
+
+        box-shadow:
+            0 8px 30px rgba(91, 76, 101, 0.08);
+
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 35px;
+    }
+
+    .section-title {
+        font-size: 24px;
+        margin-bottom: 8px;
+        color: #392f45;
+    }
+
+    .section-description {
+        color: #62586c;
+        font-size: 14px;
+        margin-bottom: 25px;
+    }
+
+
+    /* TYPE BUTTONS */
+
+    .type-buttons {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 25px;
+    }
+
+    .type-btn {
+        flex: 1;
+        padding: 13px;
+
+        border: 1px solid #e4dce8;
+        border-radius: 10px;
+
+        background: #fffafb;
+        cursor: pointer;
+
+        font-weight: bold;
+        color: #554660;
+    }
+
+    .type-btn.active {
+        background: #b49acb;
+        color: #382746;
+        border-color: #b49acb;
+    }
+
+
+    /* FORM */
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+    }
+
+    .form-group {
+        margin-bottom: 18px;
+    }
+
+    label {
+        display: block;
+        font-size: 13px;
+        font-weight: bold;
+        margin-bottom: 8px;
+        color: #463a50;
+    }
+
+    input,
+    select,
+    textarea {
+        width: 100%;
+        padding: 13px;
+
+        border: 1px solid #e5dfe5;
+        border-radius: 10px;
+
+        outline: none;
+        font-size: 14px;
+
+        background: #fffcfd;
+        color: #3d3247;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+        border-color: #b8a7c9;
+        background: white;
+    }
+
+    textarea {
+        height: 100px;
+        resize: none;
+    }
+
+
+    /* IMAGE UPLOAD */
+
+    .upload-area {
+        border: 2px dashed #cbbdd4;
+        border-radius: 12px;
+
+        padding: 25px;
+        text-align: center;
+
+        background: #fdf8fc;
+        cursor: pointer;
+    }
+
+    .upload-area:hover {
+        border-color: #aa97bd;
+        background: #faf2fa;
+    }
+
+    .upload-icon {
+        font-size: 30px;
+        margin-bottom: 8px;
+        color: #6f4f91;
+    }
+
+    .upload-area strong {
+        color: #68447f;
+    }
+
+    .upload-area p {
+        color: #655a6d;
+        font-size: 12px;
+        margin-top: 7px;
+    }
+
+    #imageInput {
+        display: none;
+    }
+
+
+    /* PREVIEW */
+
+    .preview-section {
+        background: #fffaf4;
+        border-radius: 14px;
+
+        padding: 20px;
+
+        border: 1px solid #eee1dc;
+    }
+
+    .preview-title {
+        font-size: 17px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #3e3348;
+    }
+
+    .preview-box {
+        height: 240px;
+
+        border-radius: 12px;
+
+        background: #f2e9ed;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        overflow: hidden;
+    }
+
+    .preview-box img {
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+
+        display: none;
+    }
+
+    .preview-placeholder {
+        text-align: center;
+        color: #665a70;
+    }
+
+    .preview-placeholder div {
+        font-size: 35px;
+        margin-bottom: 8px;
+        color: #755887;
+    }
+
+
+    /* TIPS */
+
+    .tips {
+        margin-top: 20px;
+
+        background: #f7f0f8;
+
+        padding: 18px;
+
+        border-radius: 12px;
+    }
+
+    .tips h3 {
+        font-size: 15px;
+        margin-bottom: 12px;
+        color: #3f3450;
+    }
+
+    .tips p {
+        font-size: 13px;
+        color: #5c5264;
+        margin-bottom: 8px;
+    }
+
+
+    /* SUBMIT */
+
+    .submit-btn {
+        width: 100%;
+
+        padding: 14px;
+
+        background: #765294;
+        color: white;
+
+        border: none;
+        border-radius: 10px;
+
+        cursor: pointer;
+
+        font-size: 15px;
+        font-weight: bold;
+
+        margin-top: 5px;
+    }
+
+    .submit-btn:hover {
+        background: #604078;
+    }
+
+
+    /* FOOTER */
+
+    footer {
+        margin-top: 60px;
+
+        background: #75677f;
+        color: white;
+
+        padding: 25px 7%;
+
+        display: flex;
+
+        justify-content: space-between;
+        align-items: center;
+
+        gap: 20px;
+    }
+
+    footer p {
+        color: #eee7f0;
+        font-size: 13px;
+    }
+
+
+    /* RESPONSIVE */
+
+    @media (max-width: 900px) {
+
+        .hero {
+            padding: 50px 6%;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+        }
+
+        .hero-image {
+            width: 330px;
+        }
+
+        .hero-image img {
+            width: 300px;
+            height: 280px;
+        }
+
+        .form-card {
+            grid-template-columns: 1fr;
+        }
+    }
+
+
+    @media (max-width: 600px) {
+
+        .hero {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .hero-image {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .hero-image img {
+            width: 280px;
+            height: 240px;
+        }
+
+        .form-row {
+            grid-template-columns: 1fr;
+        }
+
+        .hero h1 {
+            font-size: 32px;
+        }
+
+        .form-card {
+            padding: 22px;
+        }
+
+        .hero-buttons {
+            flex-direction: column;
+        }
+
+        footer {
+            flex-direction: column;
+            text-align: center;
+        }
+    }
+/* MODAL */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(48, 40, 58, 0.55);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal-content {
+    background: white;
+    width: 100%;
+    max-width: 650px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+}
+
+.modal-title {
+    font-size: 24px;
+    color: #392f45;
+    margin-bottom: 20px;
+}
+
+.modal-image {
+    width: 180px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.review-details {
+    background: #faf6fb;
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 20px;
+}
+
+.review-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.review-label {
+    font-weight: bold;
+    color: #4b3d55;
+    min-width: 120px;
+}
+
+.review-value {
+    color: #62586c;
+    word-break: break-word;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.modal-btn {
+    flex: 1;
+    padding: 13px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.cancel-btn {
+    background: #f1ebf3;
+    color: #4f4059;
+    border: 1px solid #ddd2e2;
+}
+
+.confirm-btn {
+    background: #765294;
+    color: white;
+    border: none;
+}
+
+.confirm-btn:hover {
+    background: #604078;
+}
+
+.success-modal {
+    text-align: center;
+}
+
+.success-icon {
+    font-size: 45px;
+    color: #765294;
+    margin-bottom: 15px;
+}
+
+.success-modal p {
+    color: #62586c;
+    margin-bottom: 22px;
+}
+
+/* ERROR POPUP */
+
+.error-modal {
+    text-align: center;
+}
+
+.error-icon {
+    width: 55px;
+    height: 55px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    background: #f3e8f5;
+    color: #765294;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.error-message {
+    color: #62586c;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 22px;
+}
+</style>
+
+
+</head>
+
+<body>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+
+        <h1>
+            Lost something?
+            <br>
+            <span>Let's help you find it.</span>
+        </h1>
+
+        <p>
+            Report lost or found items and help reconnect
+            people with their belongings. A small report
+            can make a big difference.
+        </p>
+
+        <div class="hero-buttons">
+
+            <button
+                class="hero-btn primary-btn"
+                onclick="selectType('lost')">
+
+                Report Lost Item
+
+            </button>
+
+            <button
+                class="hero-btn secondary-btn"
+                onclick="selectType('found')">
+
+                Report Found Item
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-image">
+
+        <img
+            src="https://thedailytexan.com/wp-content/uploads/2018/09/lostandfoundcolor.jpg"
+            alt="Lost and Found Illustration">
+
+    </div>
+
+</section>
+
+
+<!-- MAIN -->
+
+<main class="container">
+
+    <div class="form-card">
+
+        <!-- FORM -->
+
+        <div>
+
+            <h2 class="section-title">
+                Report a Lost or Found Item
+            </h2>
+
+            <p class="section-description">
+                Provide some details about the item so it can
+                be identified easily.
+            </p>
+
+
+            <!-- LOST / FOUND -->
+
+            <div class="type-buttons">
+
+                <button
+                    type="button"
+                    class="type-btn active"
+                    id="lostBtn"
+                    onclick="selectType('lost')">
+
+                    Lost Item
+
+                </button>
+
+                <button
+                    type="button"
+                    class="type-btn"
+                    id="foundBtn"
+                    onclick="selectType('found')">
+
+                    Found Item
+
+                </button>
+
+            </div>
+
+
+            <form id="reportForm">
+
+                <!-- ITEM NAME + CATEGORY -->
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>
+                            Item Name *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="itemName"
+                            placeholder="e.g. Black Wallet"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Category *
+                        </label>
+
+                        <select
+                            id="category"
+                            required>
+
+                            <option value="">
+                                Select Category
+                            </option>
+
+                            <option>Wallet</option>
+                            <option>Mobile Phone</option>
+                            <option>Bag</option>
+                            <option>Keys</option>
+                            <option>Documents</option>
+                            <option>Electronics</option>
+                            <option>Accessories</option>
+                            <option>Other</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="form-group">
+
+                    <label>
+                        Description *
+                    </label>
+
+                    <textarea
+                        id="description"
+                        placeholder="Describe the item, color, brand, unique marks, etc."
+                        required></textarea>
+
+                </div>
+
+
+                <!-- LOCATION + DATE -->
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>
+                            Location *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="location"
+                            placeholder="e.g. College Library"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Date *
+                        </label>
+
+                        <input
+                            type="date"
+                            id="date"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CONTACT -->
+
+                <div class="form-group">
+
+                    <label>
+                        Contact Information *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="contact"
+                        placeholder="Email or phone number"
+                        required>
+
+                </div>
+
+
+                <!-- IMAGE -->
+
+                <div class="form-group">
+
+                    <label>
+                        Upload Image *
+                    </label>
+
+
+                    <label
+                        class="upload-area"
+                        for="imageInput">
+
+                        <div class="upload-icon">
+                            ↑
+                        </div>
+
+                        <div>
+                            Drag & drop an image here or
+                            <strong>Choose File</strong>
+                        </div>
+
+                        <p>
+                            JPG, JPEG or PNG only · Maximum 2 MB
+                        </p>
+
+                    </label>
+
+
+                    <input
+                        type="file"
+                        id="imageInput"
+                        accept=".jpg,.jpeg,.png">
+
+                </div>
+
+
+                <!-- SUBMIT -->
+
+                <button
+                    type="submit"
+                    class="submit-btn">
+
+                    Submit Report
+
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- PREVIEW -->
+
+        <div>
+
+            <div class="preview-section">
+
+                <div class="preview-title">
+                    Report Preview
+                </div>
+
+
+                <!-- IMAGE PREVIEW -->
+
+                <div class="preview-box">
+
+                    <div
+                        class="preview-placeholder"
+                        id="previewPlaceholder">
+
+                        <div>+</div>
+
+                        <p>
+                            Your image preview will appear here
+                        </p>
+
+                    </div>
+
+
+                    <img
+                        id="previewImage"
+                        alt="Image Preview">
+
+                </div>
+
+            </div>
+
+
+            <!-- TIPS -->
+
+            <div class="tips">
+
+                <h3>
+                    Quick Tips
+                </h3>
+
+                <p>
+                    Use a clear image of the item
+                </p>
+
+                <p>
+                    Mention unique identifying details
+                </p>
+
+                <p>
+                    Select the correct item category
+                </p>
+
+                <p>
+                    Only JPG, JPEG and PNG images are accepted
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+<!-- REVIEW POPUP -->
+
+<div class="modal" id="reviewModal">
+
+    <div class="modal-content">
+
+        <div class="modal-title">
+            Review Your Report
+        </div>
+
+        <img
+            id="reviewImage"
+            class="modal-image"
+            alt="Uploaded Image">
+
+        <div class="review-details">
+
+            <div class="review-row">
+                <span class="review-label">Type:</span>
+                <span class="review-value" id="reviewType"></span>
+            </div>
+
+            <div class="review-row">
+                <span class="review-label">Item Name:</span>
+                <span class="review-value" id="reviewItemName"></span>
+            </div>
+
+            <div class="review-row">
+                <span class="review-label">Category:</span>
+                <span class="review-value" id="reviewCategory"></span>
+            </div>
+
+            <div class="review-row">
+                <span class="review-label">Description:</span>
+                <span class="review-value" id="reviewDescription"></span>
+            </div>
+
+            <div class="review-row">
+                <span class="review-label">Location:</span>
+                <span class="review-value" id="reviewLocation"></span>
+            </div>
+
+            <div class="review-row">
+                <span class="review-label">Date:</span>
+                <span class="review-value" id="reviewDate"></span>
+            </div>
+
+            <div class="review-row">
+                <span class="review-label">Contact:</span>
+                <span class="review-value" id="reviewContact"></span>
+            </div>
+
+        </div>
+
+        <div class="modal-buttons">
+
+            <button
+                type="button"
+                class="modal-btn cancel-btn"
+                onclick="closeReviewModal()">
+                Cancel
+            </button>
+
+            <button
+                type="button"
+                class="modal-btn confirm-btn"
+                id="confirmSubmit">
+                Submit Report
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- SUCCESS POPUP -->
+
+<div class="modal" id="successModal">
+
+    <div class="modal-content success-modal">
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+        <div class="modal-title">
+            Report Submitted
+        </div>
+
+        <p>
+            Your lost and found report has been submitted successfully.
+        </p>
+
+        <button
+            type="button"
+            class="modal-btn confirm-btn"
+            onclick="closeSuccessModal()">
+            Done
+        </button>
+
+    </div>
+
+</div>
+<!-- ERROR POPUP -->
+
+<div class="modal" id="errorModal">
+
+    <div class="modal-content error-modal">
+
+        <div class="error-icon">
+            !
+        </div>
+
+        <div class="modal-title">
+            Something went wrong
+        </div>
+
+        <p
+            class="error-message"
+            id="errorMessage">
+        </p>
+
+        <button
+            type="button"
+            class="modal-btn confirm-btn"
+            onclick="closeErrorModal()">
+            OK
+        </button>
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <strong>
+        ReConnect
+    </strong>
+
+    <p>
+        Helping people reconnect with their belongings.
+    </p>
+
+    <p>
+        © 2026 ReConnect
+    </p>
+
+</footer>
+
+
+<script>
+
+    let selectedType = "lost";
+
+
+    /* LOST / FOUND */
+
+    function selectType(type) {
+
+        selectedType = type;
+
+        const lostBtn =
+            document.getElementById("lostBtn");
+
+        const foundBtn =
+            document.getElementById("foundBtn");
+
+
+        if (type === "lost") {
+
+            lostBtn.classList.add("active");
+
+            foundBtn.classList.remove("active");
+
+        }
+
+        else {
+
+            foundBtn.classList.add("active");
+
+            lostBtn.classList.remove("active");
+
+        }
+
+    }
+
+
+    /* FORM ELEMENTS */
+
+    const reportForm =
+        document.getElementById("reportForm");
+
+    const imageInput =
+        document.getElementById("imageInput");
+
+    const itemName =
+        document.getElementById("itemName");
+
+    const category =
+        document.getElementById("category");
+
+    const description =
+        document.getElementById("description");
+
+    const locationInput =
+        document.getElementById("location");
+
+    const date =
+        document.getElementById("date");
+
+    const contact =
+        document.getElementById("contact");
+
+    const allowedTypes = [
+    "image/jpeg",
+    "image/png"
+];
+    /* PREVIEW ELEMENTS */
+
+    const previewImage =
+        document.getElementById("previewImage");
+
+    const previewPlaceholder =
+        document.getElementById("previewPlaceholder");
+
+
+    /* IMAGE PREVIEW */
+
+    imageInput.addEventListener(
+    "change",
+    function () {
+
+        const file = this.files[0];
+
+        if (!file) {
+            return;
+        }
+
+        if (!allowedTypes.includes(file.type)) {
+
+            showError
+            (
+                "Invalid file type. Please upload JPG, JPEG or PNG."
+            );
+
+            this.value = "";
+
+            return;
+        }
+
+        const maxSize = 2 * 1024 * 1024;
+        const minSize = 10 * 1024;
+
+        if (file.size < minSize) {
+
+            showError
+            (
+                "File is too small. Minimum size is 10 KB."
+            );
+
+            this.value = "";
+
+            return;
+        }
+
+        if (file.size > maxSize) {
+
+            showError
+            (
+                "File is too large. Maximum size is 2 MB."
+            );
+
+            this.value = "";
+
+            return;
+        }
+
+        const reader = new FileReader();
+
+        reader.onload = function (event) {
+
+            previewImage.src =
+                event.target.result;
+
+            previewImage.style.display =
+                "block";
+
+            previewPlaceholder.style.display =
+                "none";
+        };
+
+        reader.readAsDataURL(file);
+    }
+);
+
+
+    /* FORM SUBMIT */
+
+    /* MODAL ELEMENTS */
+
+const reviewModal =
+    document.getElementById("reviewModal");
+
+const successModal =
+    document.getElementById("successModal");
+
+const reviewImage =
+    document.getElementById("reviewImage");
+
+const reviewType =
+    document.getElementById("reviewType");
+
+const reviewItemName =
+    document.getElementById("reviewItemName");
+
+const reviewCategory =
+    document.getElementById("reviewCategory");
+
+const reviewDescription =
+    document.getElementById("reviewDescription");
+
+const reviewLocation =
+    document.getElementById("reviewLocation");
+
+const reviewDate =
+    document.getElementById("reviewDate");
+
+const reviewContact =
+    document.getElementById("reviewContact");
+
+const confirmSubmit =
+    document.getElementById("confirmSubmit");
+
+
+let reportData = null;
+
+
+/* ERROR MODAL */
+
+const errorModal =
+    document.getElementById("errorModal");
+
+const errorMessage =
+    document.getElementById("errorMessage");
+
+
+function showError(message) {
+
+    errorMessage.textContent =
+        message;
+
+    errorModal.style.display =
+        "flex";
+}
+
+
+function closeErrorModal() {
+
+    errorModal.style.display =
+        "none";
+}
+
+
+/* FORM SUBMIT */
+
+reportForm.addEventListener(
+    "submit",
+    function (event) {
+
+        event.preventDefault();
+
+        const file =
+            imageInput.files[0];
+
+
+        if (!file) {
+
+            showError("Please upload an image.");
+
+            return;
+        }
+        if (!allowedTypes.includes(file.type)) {
+    showError("Invalid file type. Please upload JPG, JPEG or PNG.");
+    this.value = "";
+    return;
+}
+
+        /* CHECK FILE SIZE AGAIN */
+
+        const minSize =
+            10 * 1024;
+
+        const maxSize =
+            2 * 1024 * 1024;
+
+
+        if (file.size < minSize) {
+
+            showError
+                    (
+                        "File is too small. Minimum size is 10 KB."
+
+                    );
+
+            return;
+        }
+
+
+        if (file.size > maxSize) {
+            showError
+                    (
+                        "File is too large. Maximum size is 2 MB."
+
+                    );
+
+            return;
+        }
+
+
+        /* SHOW REVIEW DATA */
+
+        reviewType.textContent =
+            selectedType === "lost"
+                ? "Lost"
+                : "Found";
+
+        reviewItemName.textContent =
+            itemName.value;
+
+        reviewCategory.textContent =
+            category.value;
+
+        reviewDescription.textContent =
+            description.value;
+
+        reviewLocation.textContent =
+            locationInput.value;
+
+        reviewDate.textContent =
+            date.value;
+
+        reviewContact.textContent =
+            contact.value;
+
+
+        /* SHOW IMAGE */
+
+        reviewImage.src =
+            previewImage.src;
+
+
+        /* OPEN REVIEW POPUP */
+
+        reviewModal.style.display =
+            "flex";
+
+    }
+);
+
+
+/* CLOSE REVIEW POPUP */
+
+function closeReviewModal() {
+
+    reviewModal.style.display =
+        "none";
+}
+
+
+/* FINAL SUBMIT */
+
+confirmSubmit.addEventListener(
+    "click",
+    async function () {
+
+        const file =
+            imageInput.files[0];
+
+
+        if (!file) {
+            return;
+        }
+
+
+        /* CONVERT IMAGE TO BASE64 */
+
+        const reader =
+            new FileReader();
+
+
+        reader.onload =
+            async function () {
+
+                const base64Image =
+                    reader.result.split(",")[1];
+
+
+                /* CREATE DATA */
+
+                reportData = {
+
+                    itemName:
+                        itemName.value,
+
+                    type:
+                        selectedType === "lost"
+                            ? "Lost"
+                            : "Found",
+
+                    category:
+                        category.value,
+
+                    description:
+                        description.value,
+
+                    location:
+                        locationInput.value,
+
+                    date:
+                        date.value,
+
+                    contact:
+                        contact.value,
+
+                    image:
+                        base64Image,
+
+                    imageName:
+                        file.name
+
+                };
+
+
+                try {
+
+                    confirmSubmit.disabled =
+                        true;
+
+                    confirmSubmit.textContent =
+                        "Submitting...";
+
+
+                    /* SEND DATA TO API */
+
+                    const response =
+                        await fetch(
+                            "https://6xlvxdbeza.execute-api.ap-south-1.amazonaws.com/test/report",
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body:
+                                    JSON.stringify(reportData)
+                            }
+                        );
+
+
+                    const result =
+                        await response.json();
+
+
+                    console.log(
+                        "API Response:",
+                        result
+                    );
+
+
+                    if (response.ok) {
+
+                        /* CLOSE REVIEW */
+
+                        reviewModal.style.display =
+                            "none";
+
+
+                        /* OPEN SUCCESS */
+
+                        successModal.style.display =
+                            "flex";
+
+
+                        console.log(
+                            "Item ID:",
+                            result.itemId
+                        );
+
+                    }
+
+                    else {
+
+                        showError(
+                            result.error ||
+                            "Failed to submit report."
+                        );
+
+                    }
+
+
+                }
+
+                catch (error) {
+
+                    console.log(
+                        "Error:",
+                        error
+                    );
+
+                    showError(
+                        "Unable to connect to the server."
+                    );
+
+                }
+
+
+                finally {
+
+                    confirmSubmit.disabled =
+                        false;
+
+                    confirmSubmit.textContent =
+                        "Submit Report";
+
+                }
+
+            };
+
+
+        reader.readAsDataURL(file);
+
+    }
+);
+
+
+/* CLOSE SUCCESS POPUP */
+
+function closeSuccessModal() {
+
+    successModal.style.display =
+        "none";
+
+    reportForm.reset();
+
+    imageInput.value = "";
+
+    previewImage.style.display =
+        "none";
+
+    previewPlaceholder.style.display =
+        "block";
+
+    selectType("lost");
+}
+
+</script>
+
+</body>
+
+</html>
 
