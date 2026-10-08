@@ -138,6 +138,25 @@ def lambda_handler(event, context):
                 "createdAt": datetime.utcnow().isoformat()
             }
         )
+       # Success response
+        return {
+            "statusCode": 200,
+            "headers": {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "Content-Type",
+                "Access-Control-Allow-Methods": "POST,OPTIONS"
+            },
+            "body": json.dumps({
+                "message": "Report submitted successfully",
+                "itemId": item_id
+            })
+        }
+
+
+
+
+        
+
 
 
  
