@@ -119,7 +119,25 @@ def lambda_handler(event, context):
             Key="uploads/" + file_name,
             Body=image_bytes
         )
+# Generate unique item ID
+        item_id = str(uuid.uuid4())
 
 
-        
+        # Store details in DynamoDB
+        table.put_item(
+            Item={
+                "itemId": item_id,
+                "itemName": item_name,
+                "type": item_type,
+                "category": category,
+                "description": description,
+                "location": location,
+                "date": date,
+                "contact": contact,
+                "imageKey": "uploads/" + file_name,
+                "createdAt": datetime.utcnow().isoformat()
+            }
+        )
 
+
+ 
