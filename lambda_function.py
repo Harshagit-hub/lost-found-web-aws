@@ -151,6 +151,20 @@ def lambda_handler(event, context):
                 "itemId": item_id
             })
         }
+    except Exception as e:
+
+        # Error response
+        return {
+            "statusCode": 500,
+            "headers": {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "Content-Type",
+                "Access-Control-Allow-Methods": "POST,OPTIONS"
+            },
+            "body": json.dumps({
+                "error": str(e)
+            })
+        }
 
 
 
